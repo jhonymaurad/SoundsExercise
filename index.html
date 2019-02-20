@@ -6,7 +6,7 @@
     <title>Sounds Exercise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    
 </head>
 <body>
 
@@ -65,6 +65,22 @@
     <audio src="sounds/Basic_Rock_FillintoCrash_135.mp3" data-key="74"></audio>
     <audio src="sounds/Basic_Rock_FillintoCra#19A6.mp3" data-key="75"></audio>
     <audio src="sounds/Basic_Rock_Crash_135.mp3" data-key="76"></audio>
+
+    <script>
+        function playSound(e)
+        {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"`);
+
+            if(!sound) return;
+
+            key.classList.add('playing');
+            audio.currentTime = 0;
+            audio.play();
+
+        }
+    
+    </script>
     
 </body>
 </html>
