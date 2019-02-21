@@ -16,69 +16,78 @@
             <span class="sound">clap</span>
         </div>
         
-        <div class="key" data-keys="83">
+        <div class="key" data-key="83">
             <kbd>S</kbd>
-            <span>hihat</span>
+            <span class="sound">hihat</span>
         </div>
 
-        <div class="key" data-keys="68">
+        <div class="key" data-key="68">
             <kbd>D</kbd>
-            <span>kick</span>
+            <span class="sound">kick</span>
         </div>
 
-        <div class="key" data-keys="70">
+        <div class="key" data-key="70">
             <kbd>F</kbd>
-            <span>openhat</span>
+            <span class="sound">openhat</span>
         </div>
 
-        <div class="key" data-keys="71">
+        <div class="key" data-key="71">
             <kbd>G</kbd>
-            <span>boom</span>
+            <span class="sound">boom</span>
         </div>
 
         <div class="key" data-key="72">
             <kbd>H</kbd>
-            <span>ride</span>
+            <span class="sound">ride</span>
         </div>
         <div class="key" data-key="74">
             <kbd>J</kbd>
-            <span>snare</span>
+            <span class="sound">snare</span>
         </div>
 
         <div class="key" data-key="75">
             <kbd>K</kbd>
-            <span>tom</span>
+            <span class="sound">tom</span>
         </div>
 
         <div class="key" data-key="76">
             <kbd>L</kbd>
-            <span>tink</span>
+            <span class="sound">tink</span>
         </div>
     </div>
 
     <audio src="sounds/first_beat.mp3" data-key="65"></audio>
-    <audio src="sounds/Drivig_Force_120.mp3" data-key="83"></audio>
-    <audio src="sounds/Cymbol_Groove.mp3" data-key="68"></audio>
+    <audio src="sounds/Driving_Force_120.mp3" data-key="83"></audio>
+    <audio src="sounds/Cymbal_Groove.mp3" data-key="68"></audio>
     <audio src="sounds/Boom_Chuk2_130.mp3" data-key="70"></audio>
     <audio src="sounds/Boom_Chuk_130.mp3" data-key="71"></audio>
     <audio src="sounds/Big_Thwack_120.mp3" data-key="72"></audio>
-    <audio src="sounds/Basic_Rock_FillintoCrash_135.mp3" data-key="74"></audio>
-    <audio src="sounds/Basic_Rock_FillintoCra#19A6.mp3" data-key="75"></audio>
+    <audio src="sounds/Basic_Rock_FillintoCrash.mp3" data-key="74"></audio>
+    <audio src="sounds/Basic_Rock_Fillinto.mp3" data-key="75"></audio>
     <audio src="sounds/Basic_Rock_Crash_135.mp3" data-key="76"></audio>
 
     <script>
+          function removeTransition(e)
+        {
+            if(e.propertyName !== 'transform') return;
+            e.target.classList.remove('playing');
+        }
+
         function playSound(e)
         {
             const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-            const key = document.querySelector(`div[data-key="${e.keyCode}"`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
 
-            if(!sound) return;
+            if(!audio) return;
 
             key.classList.add('playing');
             audio.currentTime = 0;
             audio.play();
-
         }
+
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+        window.addEventListener('keydown', playSound);
     
     </script>
     
